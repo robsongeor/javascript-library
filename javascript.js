@@ -31,7 +31,8 @@ function showAddNewBookForm(){
     }
 
     this.submitButton.addEventListener("click", () => {
-        addBookToLibrary(this.formContainer.querySelector("#input-book-title").textContent, this.authorInput.textContent, crypto.randomUUID())
+    
+        addBookToLibrary(this.titleInput.value, this.authorInput.value)
     })
 
 }
@@ -69,6 +70,7 @@ function Book(title, author, id){
 }
 
 function addBookToLibrary(title, author){
+    console.log(title)
     myLibrary.push(new Book(title, author, crypto.randomUUID()));
 
 }
