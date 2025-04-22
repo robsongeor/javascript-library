@@ -103,7 +103,7 @@ function Book(title, author, id, index) {
 
     this.domElement = this.createDomElement();
 
-    container.appendChild(this.domElement);
+    container.insertBefore(this.domElement, container.firstChild);
 
 
 }
