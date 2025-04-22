@@ -74,6 +74,7 @@ form>p{
 }
 
 .book-container {
+    position: relative;
     width: 10rem;
     height: 15rem;
     border: 1px solid black;
@@ -98,4 +99,57 @@ form>p{
 
 .book-id{
     font-size: 0.4rem;
+}
+
+.delete-book-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: .5rem;
+    border-radius: 1rem;
+    width: 1rem;
+    height: 1rem;
+    padding: 0rem;
+    background-color: transparent;
+    background-image: url("./close.png");
+    background-size: cover;
+    opacity: .8;
+    border: none;
+}
+
+.delete-book-button:hover{
+   opacity: 1;
+}
+
+.book-infomation {
+
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: inherit;
+
+    
+}
+
+.book-infomation:hover {
+   
+    backdrop-filter: blur(3px);
+    background-color: rgba(160, 160, 160, 0.123);
+    opacity: 1;
+}
+
+.read-book-button {
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    
+    height: 3rem;
+    width: 3rem;
+    
+  
 }

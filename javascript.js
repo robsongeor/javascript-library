@@ -46,9 +46,12 @@ function Book(title, author, id, index) {
     this.index = index;
     this.readStatus = false;
 
-    this.toggleReadStatus = function (e) {
+    this.toggleReadStatus = function (e, readButton, readP) {
         this.readStatus = !this.readStatus;
-        e.target.textContent = this.readStatus;
+        //e.target.textContent = this.readStatus;
+
+        readButton.style.backgroundImage = this.readStatus ? `url('eye.png')` : `url('cross-eyes.png')`
+        readP.textContent = `${this.readStatus ? 'read' : 'not read'} `;
     }
 
     this.createDomElement = function () {
@@ -70,17 +73,30 @@ function Book(title, author, id, index) {
         idElement.textContent = this.id;
         bookContainer.appendChild(idElement);
 
+       
+
+        
+
+        let bookInfomation = document.createElement("div");
+        bookInfomation.classList.add("book-infomation")
+        bookContainer.appendChild(bookInfomation);
+
+        let readP = document.createElement("p");
+        readP.textContent = `${this.readStatus ? 'read' : 'not read'} `;
+    
+        let readButton = document.createElement("button");
+        readButton.style.backgroundImage = `url('cross-eyes.png')`
+        readButton.classList.add("read-book-button")
+
+        bookInfomation.appendChild(readButton);
+        bookInfomation.appendChild(readP);
+        bookInfomation.addEventListener("click", (e) => this.toggleReadStatus(e, readButton, readP))
+        
         let deleteButton = document.createElement("button");
-        deleteButton.textContent = "X";
+
         deleteButton.classList.add("delete-book-button")
         bookContainer.appendChild(deleteButton)
         deleteButton.addEventListener("click", () => deleteBook(this));
-
-        let readButton = document.createElement("button");
-        readButton.textContent = `${this.readStatus}`;
-        readButton.classList.add("read-book-button")
-        bookContainer.appendChild(readButton);
-        readButton.addEventListener("click", (e) => this.toggleReadStatus(e))
 
         return bookContainer;
     }
@@ -109,7 +125,16 @@ function addBookToLibrary(title, author) {
     myLibrary.push(new Book(title, author, crypto.randomUUID(), myLibrary.length));
 }
 
-
+myLibrary.push(new Book("The Midnight Library", "Matt Haig", crypto.randomUUID(), myLibrary.length));
+myLibrary.push(new Book("Where the Crawdads Sing", "Delia Owens", crypto.randomUUID(), myLibrary.length));
+myLibrary.push(new Book("The Silent Patient", "Alex Michaelides", crypto.randomUUID(), myLibrary.length));
+myLibrary.push(new Book("It Ends with Us", "Colleen Hoover", crypto.randomUUID(), myLibrary.length));
+myLibrary.push(new Book("The Four Winds", "Kristin Hannah", crypto.randomUUID(), myLibrary.length));
+myLibrary.push(new Book("Verity", "Colleen Hoover", crypto.randomUUID(), myLibrary.length));
+myLibrary.push(new Book("Atomic Habits", "James Clear", crypto.randomUUID(), myLibrary.length));
+myLibrary.push(new Book("Lessons in Chemistry", "Bonnie Garmus", crypto.randomUUID(), myLibrary.length));
+myLibrary.push(new Book("Spare", "Prince Harry", crypto.randomUUID(), myLibrary.length));
+myLibrary.push(new Book("Daisy Jones & The Six", "Taylor Jenkins Reid", crypto.randomUUID(), myLibrary.length));
 
 
 
