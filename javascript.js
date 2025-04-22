@@ -23,16 +23,18 @@ function showAddNewBookForm(){
         if(this.display){
             this.formContainer.setAttribute('style', 'display: none;')
             this.display = false;
+            addNewButton.textContent = "ADD"
         }else{
             this.formContainer.setAttribute('style', 'display: flex;')
             this.display = true;
-            
+            addNewButton.textContent = "CLOSE"
         }
     }
 
     this.submitButton.addEventListener("click", () => {
-    
         addBookToLibrary(this.titleInput.value, this.authorInput.value)
+        this.titleInput.value = "";
+        this.authorInput.value = "";
     })
 
 }
