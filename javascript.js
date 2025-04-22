@@ -59,32 +59,33 @@ function createBookDOMElement(book){
     idElement.textContent = book.id;
     bookContainer.appendChild(idElement);
 
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "X";
+    deleteButton.classList.add("delete-book-button")
+    bookContainer.appendChild(deleteButton)
+
     return bookContainer;
 }
 
-function Book(title, author, id){
+
+function Book(title, author, id, index){
     this.title = title;
     this.author = author;
     this.id = id;
+    this.index = index;
     this.domElement = createBookDOMElement(this)
-
+    console.log(index)
     container.appendChild(this.domElement);
 }
 
 function addBookToLibrary(title, author){
-    console.log(title)
-    myLibrary.push(new Book(title, author, crypto.randomUUID()));
-
+    myLibrary.push(new Book(title, author, crypto.randomUUID(), myLibrary.length));
 }
 
-// for (let i = 0; i < 19; i++) {
-//     addBookToLibrary("The Book of Books!", "david mckensies")
-    
-// }
 
 
 
-console.table(myLibrary);
+
 
 
 
