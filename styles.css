@@ -66,10 +66,12 @@ form>p{
 
 
 .container {
+    padding: 0 5rem;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-around;
+    justify-content: flex-start ;
+   
     
 }
 
