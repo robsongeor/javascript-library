@@ -40,33 +40,6 @@ function showAddNewBookForm() {
 }
 
 
-function createBookDOMElement(book) {
-    let bookContainer = document.createElement("div");
-    bookContainer.classList.add("book-container")
-
-    let titleElement = document.createElement("p")
-    titleElement.classList.add("book-title")
-    titleElement.textContent = book.title;
-    bookContainer.appendChild(titleElement);
-
-    let authorElement = document.createElement("p")
-    authorElement.classList.add("book-author")
-    authorElement.textContent = book.author;
-    bookContainer.appendChild(authorElement);
-
-    let idElement = document.createElement("p")
-    idElement.classList.add("book-id")
-    idElement.textContent = book.id;
-    bookContainer.appendChild(idElement);
-
-    let deleteButton = document.createElement("button");
-    deleteButton.textContent = "X";
-    deleteButton.classList.add("delete-book-button")
-    bookContainer.appendChild(deleteButton)
-    deleteButton.addEventListener("click", () => deleteBook(book));
-
-    return bookContainer;
-}
 
 
 function Book(title, author, id, index) {
@@ -74,9 +47,53 @@ function Book(title, author, id, index) {
     this.author = author;
     this.id = id;
     this.index = index;
-    this.domElement = createBookDOMElement(this)
+    this.readstatus = false;
+
+    this.toggleReadStatus = function (e) {
+        this.readstatus = !this.readstatus;
+        e.target.textContent = this.readstatus
+
+
+    }
+
+    this.createDomElement = function () {
+        let bookContainer = document.createElement("div");
+        bookContainer.classList.add("book-container")
+
+        let titleElement = document.createElement("p")
+        titleElement.classList.add("book-title")
+        titleElement.textContent = this.title;
+        bookContainer.appendChild(titleElement);
+
+        let authorElement = document.createElement("p")
+        authorElement.classList.add("book-author")
+        authorElement.textContent = this.author;
+        bookContainer.appendChild(authorElement);
+
+        let idElement = document.createElement("p")
+        idElement.classList.add("book-id")
+        idElement.textContent = this.id;
+        bookContainer.appendChild(idElement);
+
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "X";
+        deleteButton.classList.add("delete-book-button")
+        bookContainer.appendChild(deleteButton)
+        deleteButton.addEventListener("click", () => deleteBook(this));
+
+        let readButton = document.createElement("button");
+        readButton.textContent = `qwe`;
+        readButton.classList.add("read-book-button")
+        bookContainer.appendChild(readButton);
+        readButton.addEventListener("click", (e) => this.toggleReadStatus(e))
+
+        return bookContainer;
+    }
+
+    this.domElement = this.createDomElement();
 
     container.appendChild(this.domElement);
+
 
 }
 
