@@ -39,21 +39,16 @@ function showAddNewBookForm() {
 
 }
 
-
-
-
 function Book(title, author, id, index) {
     this.title = title;
     this.author = author;
     this.id = id;
     this.index = index;
-    this.readstatus = false;
+    this.readStatus = false;
 
     this.toggleReadStatus = function (e) {
-        this.readstatus = !this.readstatus;
-        e.target.textContent = this.readstatus
-
-
+        this.readStatus = !this.readStatus;
+        e.target.textContent = this.readStatus;
     }
 
     this.createDomElement = function () {
@@ -82,7 +77,7 @@ function Book(title, author, id, index) {
         deleteButton.addEventListener("click", () => deleteBook(this));
 
         let readButton = document.createElement("button");
-        readButton.textContent = `qwe`;
+        readButton.textContent = `${this.readStatus}`;
         readButton.classList.add("read-book-button")
         bookContainer.appendChild(readButton);
         readButton.addEventListener("click", (e) => this.toggleReadStatus(e))
