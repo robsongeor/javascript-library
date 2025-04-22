@@ -77,6 +77,7 @@ function Book(title, author, id, index) {
     this.domElement = createBookDOMElement(this)
 
     container.appendChild(this.domElement);
+
 }
 
 function deleteBook(bookToDelete) {
