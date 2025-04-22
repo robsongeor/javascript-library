@@ -4,6 +4,39 @@ const bookContainer = document.querySelector(".book-container");
 
 const container = document.querySelector(".container");
 
+// Display Form //
+const addNewButton = document.querySelector(".add-new");
+newBookForm = new showAddNewBookForm();
+
+addNewButton.addEventListener("click", () => {
+    newBookForm.showForm();
+})
+
+function showAddNewBookForm(){
+    this.display = false;
+    this.formContainer = document.querySelector(".add-new-form-container");
+    this.submitButton = this.formContainer.querySelector("button");
+    this.titleInput = this.formContainer.querySelector("#input-book-title");
+    this.authorInput = this.formContainer.querySelector("#input-book-author");
+
+    this.showForm = function(){
+        if(this.display){
+            this.formContainer.setAttribute('style', 'display: none;')
+            this.display = false;
+        }else{
+            this.formContainer.setAttribute('style', 'display: flex;')
+            this.display = true;
+            
+        }
+    }
+
+    this.submitButton.addEventListener("click", () => {
+        addBookToLibrary(this.formContainer.querySelector("#input-book-title").textContent, this.authorInput.textContent, crypto.randomUUID())
+    })
+
+}
+
+
 function createBookDOMElement(book){
     let bookContainer = document.createElement("div");
     bookContainer.classList.add("book-container")
@@ -40,10 +73,12 @@ function addBookToLibrary(title, author){
 
 }
 
-for (let i = 0; i < 19; i++) {
-    addBookToLibrary("The Book of Books!", "david mckensies")
+// for (let i = 0; i < 19; i++) {
+//     addBookToLibrary("The Book of Books!", "david mckensies")
     
-}
+// }
+
+
 
 console.table(myLibrary);
 
