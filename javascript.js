@@ -39,22 +39,90 @@ function showAddNewBookForm() {
 
 }
 
-function Book(title, author, id, index) {
-    this.title = title;
-    this.author = author;
-    this.id = id;
-    this.index = index;
-    this.readStatus = false;
+// function Book(title, author, id, index) {
+//     this.title = title;
+//     this.author = author;
+//     this.id = id;
+//     this.index = index;
+//     this.readStatus = false;
 
-    this.toggleReadStatus = function (e, readButton, readP) {
-        this.readStatus = !this.readStatus;
-        //e.target.textContent = this.readStatus;
+//     this.toggleReadStatus = function (e, readButton, readP) {
+//         this.readStatus = !this.readStatus;
 
-        readButton.style.backgroundImage = this.readStatus ? `url('eye.png')` : `url('cross-eyes.png')`
-        readP.textContent = `${this.readStatus ? 'read' : 'not read'} `;
+//         readButton.style.backgroundImage = this.readStatus ? `url('eye.png')` : `url('cross-eyes.png')`
+//         readP.textContent = `${this.readStatus ? 'read' : 'not read'} `;
+//     }
+
+//     this.createDomElement = function () {
+//         let bookContainer = document.createElement("div");
+//         bookContainer.classList.add("book-container")
+
+//         let titleElement = document.createElement("p")
+//         titleElement.classList.add("book-title")
+//         titleElement.textContent = this.title;
+//         bookContainer.appendChild(titleElement);
+
+//         let authorElement = document.createElement("p")
+//         authorElement.classList.add("book-author")
+//         authorElement.textContent = this.author;
+//         bookContainer.appendChild(authorElement);
+
+//         let idElement = document.createElement("p")
+//         idElement.classList.add("book-id")
+//         idElement.textContent = this.id;
+//         bookContainer.appendChild(idElement);
+
+//         let bookInfomation = document.createElement("div");
+//         bookInfomation.classList.add("book-infomation")
+//         bookContainer.appendChild(bookInfomation);
+
+//         let readP = document.createElement("p");
+//         readP.textContent = `${this.readStatus ? 'read' : 'not read'} `;
+
+//         let readButton = document.createElement("button");
+//         readButton.style.backgroundImage = `url('cross-eyes.png')`
+//         readButton.classList.add("read-book-button")
+
+//         bookInfomation.appendChild(readButton);
+//         bookInfomation.appendChild(readP);
+//         bookInfomation.addEventListener("click", (e) => this.toggleReadStatus(e, readButton, readP))
+
+//         let deleteButton = document.createElement("button");
+
+//         deleteButton.classList.add("delete-book-button")
+//         bookContainer.appendChild(deleteButton)
+//         deleteButton.addEventListener("click", () => deleteBook(this));
+
+//         return bookContainer;
+//     }
+
+//     this.domElement = this.createDomElement();
+
+//     container.insertBefore(this.domElement, container.firstChild);
+
+
+// }
+
+class Book {
+
+    constructor(title, author, id, index) {
+        this.title = title;
+        this.author = author;
+        this.id = id;
+        this.index = index;
+        this.readStatus = false;
+        this.domElement = this.createDomElement();
+        container.insertBefore(this.domElement, container.firstChild);
     }
 
-    this.createDomElement = function () {
+    toggleReadStatus() {
+        this.readStatus = !this.readStatus;
+
+        this.readButton.style.backgroundImage = this.readStatus ? `url('eye.png')` : `url('cross-eyes.png')`
+        this.readP.textContent = `${this.readStatus ? 'read' : 'not read'} `;
+    }
+
+    createDomElement() {
         let bookContainer = document.createElement("div");
         bookContainer.classList.add("book-container")
 
@@ -73,25 +141,21 @@ function Book(title, author, id, index) {
         idElement.textContent = this.id;
         bookContainer.appendChild(idElement);
 
-       
-
-        
-
         let bookInfomation = document.createElement("div");
         bookInfomation.classList.add("book-infomation")
         bookContainer.appendChild(bookInfomation);
 
-        let readP = document.createElement("p");
-        readP.textContent = `${this.readStatus ? 'read' : 'not read'} `;
-    
-        let readButton = document.createElement("button");
-        readButton.style.backgroundImage = `url('cross-eyes.png')`
-        readButton.classList.add("read-book-button")
+        this.readP = document.createElement("p");
+        this.readP.textContent = `${this.readStatus ? 'read' : 'not read'} `;
 
-        bookInfomation.appendChild(readButton);
-        bookInfomation.appendChild(readP);
-        bookInfomation.addEventListener("click", (e) => this.toggleReadStatus(e, readButton, readP))
-        
+        this.readButton = document.createElement("button");
+        this.readButton.style.backgroundImage = `url('cross-eyes.png')`
+        this.readButton.classList.add("read-book-button")
+
+        bookInfomation.appendChild(this.readButton);
+        bookInfomation.appendChild(this.readP);
+        bookInfomation.addEventListener("click", (e) => this.toggleReadStatus(e, this.readButton, this.readP))
+
         let deleteButton = document.createElement("button");
 
         deleteButton.classList.add("delete-book-button")
@@ -100,12 +164,7 @@ function Book(title, author, id, index) {
 
         return bookContainer;
     }
-
-    this.domElement = this.createDomElement();
-
-    container.insertBefore(this.domElement, container.firstChild);
-
-
+    
 }
 
 function deleteBook(bookToDelete) {
